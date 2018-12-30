@@ -1,6 +1,6 @@
 <template>
-  <el-container class="mycontainer">
-      <el-header class="myheader">
+  <el-container class="container">
+      <el-header class="header">
         <el-row>
           <el-col :span="4"><div class="grid-content bg-purple"><img src="@/assets/logo.png" alt=""></div></el-col>
           <el-col :span="18"><div class="grid-content bg-purple-light middle">傲雪其电商后台管理系统</div></el-col>
@@ -8,14 +8,12 @@
         </el-row>
       </el-header>
       <el-container>
-        <el-aside width="200px" class="myaside">
+        <el-aside width="200px" class="aside">
            <el-menu
             default-active="2"
             :unique-opened="true"
             :router="true"
-            class="el-menu-vertical-demo"
-            @open="handleOpen"
-            @close="handleClose">
+            class="el-menu-vertical-demo">
               <el-submenu index="1">
                 <template slot="title">
                   <i class="el-icon-menu"></i>
@@ -49,7 +47,9 @@
               </el-submenu>
            </el-menu>
         </el-aside>
-        <el-main class="main">Main</el-main>
+        <el-main class="main">
+          <router-view></router-view>
+        </el-main>
       </el-container>
   </el-container>
 </template>
@@ -80,12 +80,6 @@ export default {
             message: '已取消删除'
           });          
         });
-      },
-      handleOpen(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      handleClose(key, keyPath) {
-        console.log(key, keyPath);
       }
     }
   
@@ -93,20 +87,20 @@ export default {
 </script>
 
 <style scoped>
-.mycontainerrd {
+.container {
   height: 100%;
 }
-.myheader {
+
+.header {
   background-color: #b3c0d1;
-  margin: 0;
-  padding: 0;
 }
-.myaside {
+
+.aside {
   background-color: #d3dce6;
 }
-.mymain {
+
+.main {
   background-color: #e9eef3;
-  height: 100%;
 }
 .middle {
   line-height: 60px;
