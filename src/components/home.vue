@@ -1,5 +1,5 @@
 <template>
-  <el-container class="mycard">
+  <el-container class="mycontainer">
       <el-header class="myheader">
         <el-row>
           <el-col :span="4"><div class="grid-content bg-purple"><img src="@/assets/logo.png" alt=""></div></el-col>
@@ -21,7 +21,7 @@
                   <i class="el-icon-menu"></i>
                   <span>用户管理</span>
                 </template>
-                  <el-menu-item index="login"><i class="el-icon-tickets"></i>用户列表</el-menu-item>
+                  <el-menu-item index="users"><i class="el-icon-tickets"></i>用户列表</el-menu-item>
               </el-submenu>
               <el-submenu index="2">
                 <template slot="title">
@@ -93,7 +93,7 @@ export default {
 </script>
 
 <style scoped>
-.mycard {
+.mycontainerrd {
   height: 100%;
 }
 .myheader {
