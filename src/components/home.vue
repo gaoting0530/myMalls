@@ -14,36 +14,12 @@
             :unique-opened="true"
             :router="true"
             class="el-menu-vertical-demo">
-              <el-submenu index="1">
+              <el-submenu v-for="(item,i) in menusList" :key="i" :index=" '' + item.order">
                 <template slot="title">
                   <i class="el-icon-menu"></i>
-                  <span>用户管理</span>
+                  <span>{{item.authName}}</span>
                 </template>
-                  <el-menu-item index="/users"><i class="el-icon-tickets"></i>用户列表</el-menu-item>
-              </el-submenu>
-              <el-submenu index="2">
-                <template slot="title">
-                  <i class="el-icon-location"></i>
-                  <span>导航一</span>
-                </template>
-                  <el-menu-item index="2-1"><i class="el-icon-location"></i>选项1</el-menu-item>
-                  <el-menu-item index="2-2"><i class="el-icon-location"></i>选项2</el-menu-item>
-              </el-submenu>
-              <el-submenu index="3">
-                <template slot="title">
-                  <i class="el-icon-location"></i>
-                  <span>导航一</span>
-                </template>
-                  <el-menu-item index="3-1"><i class="el-icon-location"></i>选项1</el-menu-item>
-                  <el-menu-item index="3-2"><i class="el-icon-location"></i>选项2</el-menu-item>
-              </el-submenu>
-              <el-submenu index="4">
-                <template slot="title">
-                  <i class="el-icon-location"></i>
-                  <span>导航一</span>
-                </template>
-                  <el-menu-item index="4-1"><i class="el-icon-location"></i>选项1</el-menu-item>
-                  <el-menu-item index="4-2"><i class="el-icon-location"></i>选项2</el-menu-item>
+                  <el-menu-item :index="item1.path" v-for="(item1,i) in item.children" :key="i"><i class="el-icon-setting"></i>{{item1.authName}}</el-menu-item>
               </el-submenu>
            </el-menu>
         </el-aside>
@@ -56,10 +32,18 @@
 
 <script>
 export default {
+  data() {
+    return {
+      menusList:[]
+    }
+  },
   beforeCreate() {
     if(!localStorage.getItem('token')) {
       this.$router.push({name: 'login'})
     }
+  },
+  created() {
+    this.getMenus()
   },
     methods: {
       logout() {
@@ -80,6 +64,11 @@ export default {
             message: '已取消删除'
           });          
         });
+      },
+      async getMenus() {
+        const res = await this.$http.get(`menus`)
+        this.menusList = res.data.data
+        console.log(res)
       }
     }
   

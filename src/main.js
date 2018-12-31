@@ -8,10 +8,11 @@ import App from './App'
 import moment from 'moment'
 import router from './router'
 import Http from '@/myplugins/http.js'
+import myBread from '@/components/common/mybread.vue'
 
 Vue.use(Http)
 Vue.use(ElementUI)
-
+Vue.component('my-bread',myBread)
 Vue.filter('fmtDate',(v) => {
   return moment(v).format('YYYY-MM-DD')
 })
