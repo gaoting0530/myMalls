@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import {Message} from 'element-ui'
 import Home from '@/components/home.vue'
 import Login from '@/components/login.vue'
 import Users from '@/components/users/userlists.vue'
@@ -12,9 +13,10 @@ import AddGoods from '@/components/goods/addgoods.vue'
 import Orders from '@/components/orders/orderlists.vue'
 import Reports from '@/components/reports/reports.vue'
 
+
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/login',
@@ -75,3 +77,19 @@ export default new Router({
     }
   ]
 })
+// 设置路由守卫
+router.beforeEach((to, from, next) => {
+  if(to.path === '/login') {
+    next()
+  } else {
+    const token = localStorage.getItem('token')
+    if(!token) {
+      //如果未登录，提示用户登录
+      Message.warning('请先登录！')
+      router.push({name: 'login'})
+      return
+    }
+    next()
+  }
+})
+export default router
