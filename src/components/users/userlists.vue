@@ -246,8 +246,6 @@ export default {
             if(res.data.meta.status === 201) {
                 this.$message.success(res.data.meta.msg)
                 this.getAllUsers()
-            }else {
-                this.$message.error(res.data.meta.msg)
             }
             this.form = {}
             this.addUserShowDialog = false
